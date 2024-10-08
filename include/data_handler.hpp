@@ -28,7 +28,7 @@ class data_handler {
         ~data_handler();
 
         void read_feature_vector(std::string path);
-        void read_feature_lavels(std::string path);
+        void read_feature_labels(std::string path);
         void split_data();
         void count_classes();
 
