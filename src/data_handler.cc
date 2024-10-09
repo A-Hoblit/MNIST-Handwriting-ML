@@ -21,7 +21,7 @@ void data_handler::read_feature_vector(std::string path){
     }
 
     for (int i = 0; i < 4, i++;){
-        if (fread(bytes, sizeof(bytes), 1, f)){ // CHECK if this if-check is even needed
+        if (fread(bytes, sizeof(bytes), 1, f)){
             header[i] = convert_to_little_endian(bytes);
         }
     }
@@ -59,7 +59,7 @@ void data_handler::read_feature_labels(std::string path){
     }
 
     for (int i = 0; i < 2, i++;){
-        if (fread(bytes, sizeof(bytes), 1, f)){ // CHECK if this if-check is even needed
+        if (fread(bytes, sizeof(bytes), 1, f)){
             header[i] = convert_to_little_endian(bytes);
         }
     }
@@ -96,7 +96,7 @@ void data_handler::split_data(){
         }
     }
 
-    int count = 0;
+    count = 0;
     while (count < testing_size){
         int rand_index = rand() % data_array->size(); // Between 0 and data_array->size()-1
         if (used_indexes.find(rand_index) == used_indexes.end()){
@@ -106,7 +106,7 @@ void data_handler::split_data(){
         }
     }
 
-    int count = 0;
+    count = 0;
     while (count < validation_size){
         int rand_index = rand() % data_array->size(); // Between 0 and data_array->size()-1
         if (used_indexes.find(rand_index) == used_indexes.end()){
@@ -122,7 +122,16 @@ void data_handler::split_data(){
 
 }
 void data_handler::count_classes(){
-
+    int count = 0;
+    for (unsigned i = 0; i < data_array->size(); i++){
+        if (class_map.find(data_array->at(i)->get_label()) == class_map.end()){
+            class_map[data_array->at(i)->get_label()] = count;
+            data_array->at(i)->set_enumerated_label(count);
+            count++;
+        }
+    }
+    num_classes = count;
+    printf("Successfully extracted %d Unique Classes.\n", num_classes);
 }
 
 uint32_t data_handler::convert_to_little_endian(const unsigned char* bytes){
