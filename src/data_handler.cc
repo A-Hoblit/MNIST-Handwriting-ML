@@ -11,7 +11,7 @@ data_handler::~data_handler(){
 }
 
 void data_handler::read_feature_vector(std::string path){
-    uint32_t header[4]; // | MAGIC | NUM IMAGES | NUM ROWS | NUM COLS |
+    uint32_t header[4]; // | MAGIC | NUM IMAGES | NUM ROWS | NUM COLS | pixel...
     unsigned char bytes[4];
     FILE *f = fopen(path.c_str(), "rb");
 
@@ -49,7 +49,7 @@ void data_handler::read_feature_vector(std::string path){
     printf("Successfully read and stored %lu feature vectors.\n", data_array->size());
 }
 void data_handler::read_feature_labels(std::string path){
-    uint32_t header[2]; // | MAGIC | NUM ITEMS |
+    uint32_t header[4]; // | MAGIC | NUM ITEMS | label | label...
     unsigned char bytes[2];
     FILE *f = fopen(path.c_str(), "rb");
 
@@ -58,7 +58,7 @@ void data_handler::read_feature_labels(std::string path){
         exit(1);
     }
 
-    for (int i = 0; i < 2, i++;){
+    for (int i = 0; i < 2, i++;){ // Only need Magic and Num Items, 0 and 1
         if (fread(bytes, sizeof(bytes), 1, f)){
             header[i] = convert_to_little_endian(bytes);
         }
@@ -88,7 +88,7 @@ void data_handler::split_data(){
 
     int count = 0;
     while (count < training_size){
-        int rand_index = rand() % data_array->size(); // Between 0 and data_array->size()-1
+        int rand_index = rand() % data_array->size();
         if (used_indexes.find(rand_index) == used_indexes.end()){
             training_data->push_back(data_array->at(rand_index));
             used_indexes.insert(rand_index);
@@ -98,7 +98,7 @@ void data_handler::split_data(){
 
     count = 0;
     while (count < testing_size){
-        int rand_index = rand() % data_array->size(); // Between 0 and data_array->size()-1
+        int rand_index = rand() % data_array->size();
         if (used_indexes.find(rand_index) == used_indexes.end()){
             testing_data->push_back(data_array->at(rand_index));
             used_indexes.insert(rand_index);
@@ -108,7 +108,7 @@ void data_handler::split_data(){
 
     count = 0;
     while (count < validation_size){
-        int rand_index = rand() % data_array->size(); // Between 0 and data_array->size()-1
+        int rand_index = rand() % data_array->size();
         if (used_indexes.find(rand_index) == used_indexes.end()){
             validation_data->push_back(data_array->at(rand_index));
             used_indexes.insert(rand_index);
@@ -149,4 +149,15 @@ std::vector<data *> * data_handler::get_test_data(){
 }
 std::vector<data *> * data_handler::get_validation_data(){
     return validation_data;
+}
+
+
+int main() {
+    data_handler *dh = new data_handler();
+    dh->read_feature_vector("./train-images.idx3-ubyte");
+    dh->read_feature_labels("../train-labels.idx1-ubyte");
+    dh->split_data();
+    dh->count_classes();
+
+    return 0;
 }
