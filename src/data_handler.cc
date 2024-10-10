@@ -123,7 +123,7 @@ void data_handler::split_data(){
 }
 void data_handler::count_classes(){
     int count = 0;
-    for (unsigned i = 0; i < data_array->size(); i++){
+    for (unsigned i = 0; i < data_array->size(); i++){ //check why this is unsigned
         if (class_map.find(data_array->at(i)->get_label()) == class_map.end()){
             class_map[data_array->at(i)->get_label()] = count;
             data_array->at(i)->set_enumerated_label(count);
@@ -135,15 +135,18 @@ void data_handler::count_classes(){
 }
 
 uint32_t data_handler::convert_to_little_endian(const unsigned char* bytes){
-
+    return (uint32_t) ((bytes[0] << 24) | // 0th byte becomes 3rd byte
+                       (bytes[1] << 16) | // 1st byte becomes 2nd byte
+                       (bytes[2] << 8 ) | // 2nd byte becomes 1st byte
+                       (bytes[3]));       // 3rd byte becomes 0th byte
 }
 
 std::vector<data *> * data_handler::get_training_data(){
-
+    return training_data;
 }
 std::vector<data *> * data_handler::get_test_data(){
-
+    return testing_data;
 }
 std::vector<data *> * data_handler::get_validation_data(){
-
+    return validation_data;
 }
