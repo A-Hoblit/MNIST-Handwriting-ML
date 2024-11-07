@@ -169,8 +169,7 @@ void Network::validate()
     printf("Validation Performance: %.4f\n", numCorrect / count);
 }
 
-int
-main()
+int main()
 {
     DataHandler *dataHandler = new DataHandler();
 #ifdef MNIST

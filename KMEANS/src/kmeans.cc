@@ -115,8 +115,7 @@ std::vector<cluster_t *> * kmeans::getClusters()
 }
 
 
-int
-main()
+int main()
 {
   DataHandler *dh = new DataHandler();
   dh->readInputData("../train-images-idx3-ubyte");

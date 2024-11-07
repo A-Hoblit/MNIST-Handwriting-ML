@@ -153,8 +153,7 @@ double KNN::testPerformance()
   return current_performance;
 }
 
-int
-main()
+int main()
 {
   DataHandler *dh = new DataHandler();
   //dh->read_csv("/home/gerardta/iris.data",",");
