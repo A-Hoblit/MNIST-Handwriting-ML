@@ -7,7 +7,7 @@ LIB_DATA := libdata.so
 all : $(LIB_DATA)
 
 $(LIB_DATA) : libdir objdir obj/data_handler.o obj/data.o
-	$(CC) $(CFLAGS) -o $(ROOT)/lib/$(LIB_DATA) obj/*.obj
+	$(CC) $(CFLAGS) -o $(ROOT)/lib/$(LIB_DATA) obj/*.o
 	rm -r $(ROOT)/obj
 
 libdir :

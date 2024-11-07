@@ -3,4 +3,3 @@ This is a from-scratch C++ implementation of a few data analysis and machine lea
 1. K-means
 2. K-Nearest-Neighbors
 3. Standard Neural Network
-4. Convolution based Neural Network
