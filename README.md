@@ -4,3 +4,6 @@ The following algorithms where implemented from scratch without any ML libraries
 1. K-means
 2. K-Nearest-Neighbors
 3. Standard Neural Network
+
+
+The top level include, lib, and src folders contain all the data handling, and the algorithm specific are labeled as such.
