@@ -7,6 +7,8 @@
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
+.ipynb_checkpoints/*
+
 include-old
 src-old
 
