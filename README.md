@@ -5,6 +5,7 @@ The following algorithms where implemented from scratch without any ML libraries
 2. K-Nearest-Neighbors
 3. Standard Neural Network
 
+For reference and comparison I also made a similar Neural Net using tensorflow, for which there is a jupyter notebook and a .py file for.
 
 The top level include, lib, and src folders contain all the data handling, and each algorithm has its own folder.
 
