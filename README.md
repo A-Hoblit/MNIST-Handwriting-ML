@@ -6,4 +6,4 @@ The following algorithms where implemented from scratch without any ML libraries
 3. Standard Neural Network
 
 
-The top level include, lib, and src folders contain all the data handling, and the algorithm specific are labeled as such.
+The top level include, lib, and src folders contain all the data handling, and each algorithm has its own folder.
